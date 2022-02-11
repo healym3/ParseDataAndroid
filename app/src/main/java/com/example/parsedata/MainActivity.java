@@ -27,24 +27,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TextView textView = (TextView) findViewById(R.id.text);
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                response ->  {
-//            Log.d("Main", "onCreate: " + response.substring(0,500));
-//
-//                }, error ->  {
-//            Log.d("Main", "Failed to get info!");
-//        }
-//       );
-        queue = Volley.newRequestQueue(this);
+
+        queue = MySingleton.getInstance(this.getApplicationContext()).
+                getRequestQueue();
+
         JsonObjectRequest jsonObjectRequest = getJsonObjectRequest();
 
         JsonArrayRequest jsonArrayRequest = getJsonArrayRequest(textView);
 
         queue.add(jsonObjectRequest);
-// Access the RequestQueue through your singleton class.
-        //MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         queue.add(jsonArrayRequest);
-        //getString(textView, queue);
+
     }
 
     @NonNull
